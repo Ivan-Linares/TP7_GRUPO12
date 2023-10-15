@@ -1,15 +1,16 @@
 package dominio;
 
-public class Tiposeguro {
+public class TipoSeguro 
+{
 	private int ID;
 	private String descripcion;
 		
-	public Tiposeguro() 
+	public TipoSeguro() 
 	{
 		super();
 	}
 	
-	public Tiposeguro(int id, String desc)
+	public TipoSeguro(int id, String desc)
 	{
 		super();
 		this.ID = id;

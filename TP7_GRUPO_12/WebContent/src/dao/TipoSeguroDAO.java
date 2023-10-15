@@ -6,39 +6,39 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import dominio.Tiposeguro;
+import dominio.TipoSeguro;
 
-public class TipoSegurodao {
+public class TipoSeguroDAO 
+{
 	private String host = "jdbc:mysql://localhost:3306/";
 	private String user = "root";
-	private String pass = "782782";
+	private String pass = "root";
 	private String dbName = "segurosgroup";
 	
 	
-	public ArrayList<Tiposeguro> ListarTiposdeSeguros() 
-	{	
+	public ArrayList<TipoSeguro> ListarTiposdeSeguros() 
+	{
 		try 
 		{
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 		} 
 		catch (ClassNotFoundException e) 
 		{
 			e.printStackTrace();
 		}
 		
-		
-		ArrayList<Tiposeguro> lista = new ArrayList<Tiposeguro>();
+		ArrayList<TipoSeguro> lista = new ArrayList<TipoSeguro>();
 		Connection conn = null;
 		try
 		{
-			conn = DriverManager.getConnection(host+dbName,user,pass);
+			conn = DriverManager.getConnection(host + dbName, user, pass);
 			Statement st = conn.createStatement();
 			
 			ResultSet rs = st.executeQuery("Select idTipo, descripcion FROM tiposeguros");
 			
 			while(rs.next())
 			{
-				Tiposeguro segurosRs = new Tiposeguro();
+				TipoSeguro segurosRs = new TipoSeguro();
 				segurosRs.setID(rs.getInt("idTipo"));
 				segurosRs.setDescripcion(rs.getString("descripcion"));
 				
@@ -51,6 +51,10 @@ public class TipoSegurodao {
 		{
 			e.printStackTrace();
 		}
+		finally
+		{
+		
+		}
 		return lista;
 	}
 	
@@ -58,7 +62,7 @@ public String devolverDescripcion(int id) {
 		
 		try 
 		{
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 		} 
 		catch (ClassNotFoundException e) 
 		{
@@ -68,9 +72,9 @@ public String devolverDescripcion(int id) {
 		String descripcion = null;
 		try
 		{
-			ArrayList<Tiposeguro> lista = ListarTiposdeSeguros();
+			ArrayList<TipoSeguro> lista = ListarTiposdeSeguros();
 			
-			for (Tiposeguro x : lista) {
+			for (TipoSeguro x : lista) {
 				if(x.getID()==id) {
 					descripcion = x.getDescripcion();
 				}
